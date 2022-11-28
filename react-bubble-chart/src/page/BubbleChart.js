@@ -4,9 +4,9 @@ import Xaxis from '../components/Xaxis';
 import XaxisLabel from '../components/XaxisLabel';
 import Yaxis from '../components/Yaxis';
 import YaxisLabel from '../components/YaxisLabel';
+import { chartConfig } from '../config/chartConfig';
 
 function BubbleChart(props) {
-    console.log('test BubbleChart render')
     let chartData = props.chartData;
     const chartLabels = props.chartLabels;
     const [minAndMaxValue, setMinAndMaxValue] = useState({
@@ -21,7 +21,6 @@ function BubbleChart(props) {
     const noOfXAxisLabels = 5;
 
     useEffect(()=>{
-        console.log('useEffect render')
         const getMinandMaxValue = () =>{
             let valueObj = minAndMaxValue;
             chartData.forEach((obj,ind)=>{
@@ -58,21 +57,20 @@ function BubbleChart(props) {
         getMinandMaxValue()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-    const width = 1500;
-    const height = 800;
+    const width = chartConfig.width;
+    const height = chartConfig.height;
     // const paddingTop = 200;
-    const paddingDown = 100;
-    const paddingRight = 30;
-    return ( <svg width={width+paddingRight} height={height+paddingDown} xmlns="http://www.w3.org/2000/svg" overflow={'Hidden'}>
+    const paddingDown = chartConfig.viewPortCoordinatepaddingDown;
+    const paddingRight = chartConfig.viewPortCoordinatepaddingRight;
+    return ( <svg width={width+paddingRight} height={height+paddingDown}>
         {
             listOfXaxisLabels.length > 0 && listOfYaxisLabels.length > 0 ? 
                 <React.Fragment key={'chartComponents'} >
-                    <Xaxis height={height} width={width} />
-                    <XaxisLabel height={height} width={width} labels={listOfXaxisLabels} />
-                    <Yaxis height={height} width={width}/>
-                    <YaxisLabel height={height} width={width} labels={listOfYaxisLabels} />
-                    <BubbleCircle height={height} width={width} xAxisLabel={listOfXaxisLabels} yAxisLabel={listOfYaxisLabels} chartData={chartData}/>
-
+                    <Xaxis/>
+                    <XaxisLabel labels={listOfXaxisLabels} />
+                    <Yaxis />
+                    <YaxisLabel labels={listOfYaxisLabels} />
+                    <BubbleCircle xAxisLabel={listOfXaxisLabels} yAxisLabel={listOfYaxisLabels} chartData={chartData}/>
                 </React.Fragment>
             :
             ''

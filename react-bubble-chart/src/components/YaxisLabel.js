@@ -1,16 +1,18 @@
 import React from 'react';
+import { chartConfig } from '../config/chartConfig';
 import Label from './Label';
 
 const YaxisLabel = (props) => {
-    console.log('test YaxisLabel render')
-    let coordinates = props.height/(props.labels.length-1);
+    const height = chartConfig.height;
+    const width = chartConfig.width;
+    let coordinates = height/(props.labels.length-1);
     let padding = 10;
     return props.labels.map((labelName,ind)=>{
-        let y = props.height - ind*coordinates;
+        let y = height - ind*coordinates;
         if(y === 0){
             y = 10 
         }
-        return <Label key={y} x={props.width/2+padding} y={y} padding={padding} axis='yAxis' labelName={labelName} />
+        return <Label key={y} x={width/2+padding} y={y} padding={padding} axis='yAxis' labelName={labelName} />
     })
 }
  

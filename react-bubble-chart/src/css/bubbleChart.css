@@ -3,3 +3,6 @@
     font-size: 14px;
     cursor: default;
 }
+.firstLetterCapitalize{
+    text-transform: capitalize;
+}
