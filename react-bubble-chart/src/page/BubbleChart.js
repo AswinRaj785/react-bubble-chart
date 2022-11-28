@@ -6,6 +6,7 @@ import Yaxis from '../components/Yaxis';
 import YaxisLabel from '../components/YaxisLabel';
 
 function BubbleChart(props) {
+    console.log('test BubbleChart render')
     let chartData = props.chartData;
     const chartLabels = props.chartLabels;
     const [minAndMaxValue, setMinAndMaxValue] = useState({
@@ -20,6 +21,7 @@ function BubbleChart(props) {
     const noOfXAxisLabels = 5;
 
     useEffect(()=>{
+        console.log('useEffect render')
         const getMinandMaxValue = () =>{
             let valueObj = minAndMaxValue;
             chartData.forEach((obj,ind)=>{
@@ -42,31 +44,39 @@ function BubbleChart(props) {
             setListofXaxisLabels(listOfXaxisLabels);
             setListofYaxisLabels(listOfYaxisLabels);
         }
-        getMinandMaxValue()
-    },[chartData])
-    const getListOfLabels = (maxVal, minVal, length) =>{
-        let difference = maxVal - minVal;
-        let range = difference/5;
-        let labelList = [];
-        let iterance = -1;
-        while(iterance <= length ){
-            labelList.push(minVal+(range*iterance)); 
-            iterance +=1;
+        const getListOfLabels = (maxVal, minVal, length) =>{
+            let difference = maxVal - minVal;
+            let range = difference/5;
+            let labelList = [];
+            let iterance = -1;
+            while(iterance <= length ){
+                labelList.push(minVal+(range*iterance)); 
+                iterance +=1;
+            }
+            return labelList
         }
-        return labelList
-    }
+        getMinandMaxValue()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
     const width = 1500;
     const height = 800;
     // const paddingTop = 200;
     const paddingDown = 100;
     const paddingRight = 30;
-    return ( <svg width={width+paddingRight} height={height+paddingDown}>
-        <Xaxis height={height} width={width} />
-        <XaxisLabel height={height} width={width} labels={listOfXaxisLabels} />
-        <Yaxis height={height} width={width}/>
-        <YaxisLabel height={height} width={width} labels={listOfYaxisLabels} />
-        <BubbleCircle height={height} width={width} xAxisLabel={listOfXaxisLabels} yAxisLabel={listOfYaxisLabels} chartData={chartData}/>
+    return ( <svg width={width+paddingRight} height={height+paddingDown} xmlns="http://www.w3.org/2000/svg" overflow={'Hidden'}>
+        {
+            listOfXaxisLabels.length > 0 && listOfYaxisLabels.length > 0 ? 
+                <React.Fragment key={'chartComponents'} >
+                    <Xaxis height={height} width={width} />
+                    <XaxisLabel height={height} width={width} labels={listOfXaxisLabels} />
+                    <Yaxis height={height} width={width}/>
+                    <YaxisLabel height={height} width={width} labels={listOfYaxisLabels} />
+                    <BubbleCircle height={height} width={width} xAxisLabel={listOfXaxisLabels} yAxisLabel={listOfYaxisLabels} chartData={chartData}/>
 
+                </React.Fragment>
+            :
+            ''
+        }
     </svg> );
 }
 

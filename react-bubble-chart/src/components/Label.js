@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Label = (props) => {
-    console.log(props.x, props.y, 'test x & y')
+    console.log('test BubbleChart render')
     let x1, x2, y1, y2;
     if(props.axis === 'xAxis'){
         x1 = props.x;

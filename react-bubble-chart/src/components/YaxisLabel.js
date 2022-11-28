@@ -2,8 +2,9 @@ import React from 'react';
 import Label from './Label';
 
 const YaxisLabel = (props) => {
+    console.log('test YaxisLabel render')
     let coordinates = props.height/(props.labels.length-1);
-    let padding = 15;
+    let padding = 10;
     return props.labels.map((labelName,ind)=>{
         let y = props.height - ind*coordinates;
         if(y === 0){

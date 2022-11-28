@@ -1,7 +1,9 @@
 import React from 'react';
-import { getRandomColor } from '../utility.js/commonUtility';
+import { getEllipsis, getRandomColor } from '../utility/commonUtility';
+import '../css/bubbleChart.css';
 
 const BubbleCircle = (props) => {
+    console.log('test BubbleCircle render')
     const getXandYPosition = (axis, chartObj)=>{
         try{
             let axisObj = {xAxis:{'name':'salary','labelState':'xAxisLabel', 'property':'width'}, yAxis:{'name':'compratio','labelState':'yAxisLabel', 'property':'height'}}
@@ -19,15 +21,15 @@ const BubbleCircle = (props) => {
         }
     }
     return props.chartData.map(chartObj=>{
-        console.log(getXandYPosition('xAxis',chartObj), getXandYPosition('yAxis', chartObj), 'test x y')
         let fillColor = getRandomColor();
         let x = getXandYPosition('xAxis', chartObj);
         let y = getXandYPosition('yAxis', chartObj);
         let radius = chartObj.headcount/2;
         return ( <React.Fragment key={chartObj.title}>
-                <circle key={chartObj.salary+','+chartObj.compratio} cx={x} cy={y} r={radius} fill={fillColor} className='bubbleCircle' aria-labelledby={chartObj.title}>
-                    </circle> 
-                <text x={x} y={y} fill='white' textAnchor='middle'>{chartObj.title}</text>
+                <circle key={chartObj.salary+','+chartObj.compratio} cx={x} cy={y} r={radius} fill={fillColor} className='bubbleCircle'>
+                    <title className=''>{chartObj.title}</title>
+                </circle> 
+                <text x={x} y={y} fill='white' textAnchor='middle' className='bubbleCircleText'>{getEllipsis(radius,chartObj.title)}<title className=''>{chartObj.title}</title></text>
             </React.Fragment>);
     })
 }

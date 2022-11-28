@@ -3,6 +3,7 @@ import './App.css';
 import BubbleChart from './page/BubbleChart';
 
 function App() {
+  console.log('test App render')
   const [chartData, setChartData] = useState([]);
   const chartLabels = {
     yAxisLabel : 'compratio',
@@ -15,6 +16,7 @@ function App() {
       fetch('https://mocki.io/v1/18936d28-2f79-4840-b146-5622e8ad1e77').then(response=>response.json()).then(data=>{
         setChartData(data)
         setLoading(false)
+        console.log('test API Call Done')
       }).catch(error=>console.log(error))
     }
     getBubbleChartData();
