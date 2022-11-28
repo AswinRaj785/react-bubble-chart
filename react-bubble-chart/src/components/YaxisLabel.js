@@ -9,7 +9,7 @@ const YaxisLabel = (props) => {
         if(y === 0){
             y = 10 
         }
-        return <Label key={y} x={props.width/2+padding} y={y} labelName={labelName} />
+        return <Label key={y} x={props.width/2+padding} y={y} padding={padding} axis='yAxis' labelName={labelName} />
     })
 }
  

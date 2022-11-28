@@ -8,7 +8,7 @@ const XaxisLabel = (props) => {
         if(x == props.width){
             x = props.width - 30
         }
-        return <Label key={x} x={x} y={props.height/2+padding} axis='xAxis' labelName={labelName} />
+        return <Label key={x} x={x} y={props.height/2+padding} padding={padding} axis='xAxis' labelName={labelName} />
     })
 }
  
